@@ -25,7 +25,7 @@ count=0
 while read -r port state service; do 
 printf "%-12s %-10s %-35s\n" "$port" "$state" "$service"
 ((++count))
-done < <(grep -E '^[0-9]+/(tcp|udp)[[:space:]]+open' "$INPUT_FILE" || true)
+done < <(grep -E '^[0-9]+/(tcp|udp)[[:space:]]+(open|filtered)' "$INPUT_FILE" || true)
 
 echo "------------------------------------------------------------"
 echo "Total open ports: $count"
