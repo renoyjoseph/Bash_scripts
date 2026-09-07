@@ -16,19 +16,19 @@ exit 1
 fi
 
 echo "Open Ports found in $INPUT_FILE:"
-echo "------------------------------------------------------------"
-printf "%-12s %-10s %-35s\n" "PORT" "STATE" "SERVICE / VERSION"
-printf "%-12s %-10s %-35s\n" "----" "-----" "-----------------"
+echo "-------------------------------------------------------------------"
+printf "%-12s %-16s %-35s\n" "PORT" "STATE" "SERVICE / VERSION"
+printf "%-12s %-16s %-35s\n" "----" "-----" "-----------------"
 
 count=0
 
 while read -r port state service; do 
-printf "%-12s %-10s %-35s\n" "$port" "$state" "$service"
+printf "%-12s %-16s %-35s\n" "$port" "$state" "$service"
 ((++count))
-done < <(grep -E '^[0-9]+/(tcp|udp)[[:space:]]+(open|filtered)' "$INPUT_FILE" || true)
+done < <(grep -E '^[0-9]+/(tcp|udp)[[:space:]]+(open\|filtered|open|filtered)' "$INPUT_FILE" || true)
 
-echo "------------------------------------------------------------"
-echo "Total open ports: $count"
+echo "----------------------------------------------------------------"
+echo "Total open/filtered ports: $count"
 
 
 
